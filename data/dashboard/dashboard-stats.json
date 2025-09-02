@@ -1,0 +1,94 @@
+{
+  "userStats": [
+    {
+      "userId": "USER_001",
+      "stats": [
+        {
+          "title": "Referral Link Traffic",
+          "value": "1,280",
+          "icon": "fas fa-mouse-pointer",
+          "trend": {
+            "direction": "positive",
+            "percentage": "+6.5%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Referral ID Usage", 
+          "value": "142",
+          "icon": "fas fa-tags",
+          "trend": {
+            "direction": "negative",
+            "percentage": "-0.10%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Total Orders Count",
+          "value": "35", 
+          "icon": "fas fa-shopping-cart",
+          "trend": {
+            "direction": "negative",
+            "percentage": "-0.2%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Rebate Earnings",
+          "value": "$8,500",
+          "icon": "fas fa-dollar-sign", 
+          "trend": {
+            "direction": "positive",
+            "percentage": "+11.8%",
+            "text": "Since last month"
+          }
+        }
+      ]
+    },
+    {
+      "userId": "USER_002",
+      "stats": [
+        {
+          "title": "Referral Link Traffic",
+          "value": "2,180",
+          "icon": "fas fa-mouse-pointer",
+          "trend": {
+            "direction": "positive",
+            "percentage": "+12.3%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Referral ID Usage", 
+          "value": "285",
+          "icon": "fas fa-tags",
+          "trend": {
+            "direction": "positive",
+            "percentage": "+8.2%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Total Orders Count",
+          "value": "72", 
+          "icon": "fas fa-shopping-cart",
+          "trend": {
+            "direction": "positive",
+            "percentage": "+15.6%",
+            "text": "Since last month"
+          }
+        },
+        {
+          "title": "Rebate Earnings",
+          "value": "$18,750",
+          "icon": "fas fa-dollar-sign", 
+          "trend": {
+            "direction": "positive",
+            "percentage": "+22.1%",
+            "text": "Since last month"
+          }
+        }
+      ]
+    }
+  ]
+}

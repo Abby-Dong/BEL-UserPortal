@@ -1,0 +1,202 @@
+{
+  "topCategories": [
+    {
+      "category": "Touch Panel PCs",
+      "sales": 3200,
+      "percentage": 28.5,
+      "color": "#007bff"
+    },
+    {
+      "category": "PoE Switches",
+      "sales": 2800,
+      "percentage": 24.9,
+      "color": "#28a745"
+    },
+    {
+      "category": "Remote I/O",
+      "sales": 2400,
+      "percentage": 21.3,
+      "color": "#ffc107"
+    },
+    {
+      "category": "Embedded Systems",
+      "sales": 1900,
+      "percentage": 16.9,
+      "color": "#17a2b8"
+    },
+    {
+      "category": "IoT Sensors",
+      "sales": 1600,
+      "percentage": 14.2,
+      "color": "#6c757d"
+    },
+    {
+      "category": "Industrial Computers",
+      "sales": 980,
+      "percentage": 8.7,
+      "color": "#dc3545"
+    }
+  ],
+  "topProducts": [
+    {
+      "rank": 1,
+      "name": "ADAM-6017",
+      "category": "Remote I/O",
+      "price": "$150",
+      "units": 20,
+      "total": "$3,000"
+    },
+    {
+      "rank": 2,
+      "name": "AIM-68G0",
+      "category": "Industrial Computers",
+      "price": "$280",
+      "units": 8,
+      "total": "$2,240"
+    },
+    {
+      "rank": 3,
+      "name": "ARK-1220",
+      "category": "Embedded Systems",
+      "price": "$410",
+      "units": 6,
+      "total": "$2,460"
+    },
+    {
+      "rank": 4,
+      "name": "PCE-5129",
+      "category": "Touch Panel PCs",
+      "price": "$520",
+      "units": 5,
+      "total": "$2,600"
+    },
+    {
+      "rank": 5,
+      "name": "UNO-2271G",
+      "category": "Embedded Systems",
+      "price": "$350",
+      "units": 4,
+      "total": "$1,400"
+    },
+    {
+      "rank": 6,
+      "name": "EKI-2525",
+      "category": "PoE Switches",
+      "price": "$90",
+      "units": 15,
+      "total": "$1,350"
+    },
+    {
+      "rank": 7,
+      "name": "WISE-4012E",
+      "category": "IoT Sensors",
+      "price": "$120",
+      "units": 11,
+      "total": "$1,320"
+    },
+    {
+      "rank": 8,
+      "name": "TPC-1551T",
+      "category": "Touch Panel PCs",
+      "price": "$800",
+      "units": 3,
+      "total": "$2,400"
+    },
+    {
+      "rank": 9,
+      "name": "MIC-770",
+      "category": "Industrial Computers",
+      "price": "$1,200",
+      "units": 2,
+      "total": "$2,400"
+    },
+    {
+      "rank": 10,
+      "name": "ADAM-6250",
+      "category": "Remote I/O",
+      "price": "$210",
+      "units": 7,
+      "total": "$1,470"
+    },
+    {
+      "rank": 11,
+      "name": "WISE-2410",
+      "category": "IoT Sensors",
+      "price": "$160",
+      "units": 8,
+      "total": "$1,280"
+    },
+    {
+      "rank": 12,
+      "name": "WISE-2200-M",
+      "category": "IoT Sensors",
+      "price": "$240",
+      "units": 5,
+      "total": "$1,200"
+    },
+    {
+      "rank": 13,
+      "name": "ADAM-6052",
+      "category": "Remote I/O",
+      "price": "$95",
+      "units": 12,
+      "total": "$1,140"
+    },
+    {
+      "rank": 14,
+      "name": "PPC-3150",
+      "category": "Touch Panel PCs",
+      "price": "$560",
+      "units": 2,
+      "total": "$1,120"
+    },
+    {
+      "rank": 15,
+      "name": "UNO-1372G",
+      "category": "Embedded Systems",
+      "price": "$270",
+      "units": 4,
+      "total": "$1,080"
+    },
+    {
+      "rank": 16,
+      "name": "WISE-4220",
+      "category": "IoT Sensors",
+      "price": "$180",
+      "units": 6,
+      "total": "$1,080"
+    },
+    {
+      "rank": 17,
+      "name": "AIR-101",
+      "category": "Industrial Computers",
+      "price": "$520",
+      "units": 2,
+      "total": "$1,040"
+    },
+    {
+      "rank": 18,
+      "name": "EKI-7420",
+      "category": "PoE Switches",
+      "price": "$190",
+      "units": 5,
+      "total": "$950"
+    },
+    {
+      "rank": 19,
+      "name": "MIC-730AI",
+      "category": "Industrial Computers",
+      "price": "$890",
+      "units": 1,
+      "total": "$890"
+    },
+    {
+      "rank": 20,
+      "name": "ADAM-6066",
+      "category": "Remote I/O",
+      "price": "$85",
+      "units": 10,
+      "total": "$850"
+    }
+  ]
+}
