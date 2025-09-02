@@ -28,11 +28,8 @@
 ### 主要頁面檔案 ✅
 - `index.html`：首頁 Dashboard 儀表板
 - `my-account.html`：我的帳戶頁面
-- `earnings-orders.html`：收益與訂單4. **佣金資料架構**：
-   - 佣金百分比不存在用戶靜態資料中，而是放在收益相關檔案
-   - `earnings-summary.json` 包含當前佣金率和等級進度
-   - `payout-history.json` 記錄每次撥款時的佣金率
-   - `order-tracking.json` 顯示每筆訂單的佣金率和收益計算
+
+earnings-orders.html：收益與訂單
 
 5. **安全考量**：
    - 銀行資訊等敏感資料需要額外的加密保護
@@ -274,7 +271,7 @@ BELPlatform/
 **說明**：
 - 每個用戶都有唯一的 `userId` 作為識別碼
 - 前端根據當前登入用戶的 ID 篩選顯示資料
-- `level`: 用戶等級資訊，不包含佣金百分比（佣金資訊移至收益相關檔案）
+- `level`: 用戶等級資訊
 - `accountNumber`: 完整帳號，前端顯示時進行遮罩處理
 
 #### 2. 通知資料 (`notifications.json`)
@@ -515,14 +512,12 @@ BELPlatform/
       "tooltipText": "Payouts over $100 USD are processed on the 5th of each month. Balances under $100 will roll over to the next month.",
       "currentLevel": {
         "name": "Explorer",
-        "commissionRate": "4.5%",
         "effectiveDate": "2025-06-15"
       },
       "levelProgress": {
         "current": 35,
         "target": 50,
-        "nextLevel": "Leader",
-        "nextCommissionRate": "5.5%"
+        "nextLevel": "Leader"
       }
     },
     {
@@ -533,14 +528,12 @@ BELPlatform/
       "tooltipText": "Payouts over $100 USD are processed on the 5th of each month. Balances under $100 will roll over to the next month.",
       "currentLevel": {
         "name": "Leader",
-        "commissionRate": "5.5%",
         "effectiveDate": "2025-08-20"
       },
       "levelProgress": {
         "current": 65,
         "target": 100,
-        "nextLevel": "Master",
-        "nextCommissionRate": "6.5%"
+        "nextLevel": "Master"
       }
     }
   ]
@@ -561,7 +554,6 @@ BELPlatform/
           "bankFee": "$20.00", 
           "processingFee": "$10.00",
           "netAmount": "$1,520.00",
-          "commissionRate": "4.5%",
           "level": "Explorer"
         },
         {
@@ -571,7 +563,6 @@ BELPlatform/
           "bankFee": "$15.00",
           "processingFee": "$5.00", 
           "netAmount": "$1,330.00",
-          "commissionRate": "4.5%",
           "level": "Explorer"
         }
       ]
@@ -586,7 +577,6 @@ BELPlatform/
           "bankFee": "$25.00", 
           "processingFee": "$15.00",
           "netAmount": "$3,060.00",
-          "commissionRate": "5.5%",
           "level": "Leader"
         }
       ]
@@ -608,7 +598,6 @@ BELPlatform/
           "amount": "$1,200.00",
           "status": "Processing",
           "statusClass": "status-processing",
-          "commissionRate": "4.5%",
           "estimatedEarning": "$54.00"
         },
         {
@@ -617,7 +606,6 @@ BELPlatform/
           "amount": "$150.00", 
           "status": "Completed",
           "statusClass": "status-completed",
-          "commissionRate": "4.5%",
           "actualEarning": "$6.75"
         }
       ]
@@ -631,7 +619,6 @@ BELPlatform/
           "amount": "$2,500.00",
           "status": "Completed",
           "statusClass": "status-completed",
-          "commissionRate": "5.5%",
           "actualEarning": "$137.50"
         },
         {
@@ -640,7 +627,6 @@ BELPlatform/
           "amount": "$850.00", 
           "status": "Processing",
           "statusClass": "status-processing",
-          "commissionRate": "5.5%",
           "estimatedEarning": "$46.75"
         }
       ]
@@ -839,13 +825,7 @@ BELPlatform/
    - 日期格式統一使用 ISO 8601 標準
    - 所有檔案的 `userId` 必須保持一致
 
-4. **佣金資料架構**：
-   - 佣金百分比不存在用戶靜態資料中，而是放在收益相關檔案
-   - `earnings-summary.json` 包含當前佣金率和等級進度
-   - `payout-history.json` 記錄每次撥款時的佣金率
-   - `order-tracking.json` 顯示每筆訂單的佣金率和收益計算
-
 4. **安全考量**：
-   - 銀行資訊等敏感資料需要額外的加密保護
-   - API 呼叫時需要適當的驗證機制
-   - 前端顯示資料時進行適當的資料清理
+  - 銀行資訊等敏感資料需要額外的加密保護
+  - API 呼叫時需要適當的驗證機制
+  - 前端顯示資料時進行適當的資料清理
