@@ -1,4 +1,4 @@
-// Common JavaScript functionality for BEL Platform
+// Common JavaScript functionality for BEL Portal
 document.addEventListener('DOMContentLoaded', async () => {
     // --- Initialize Data and UI ---
     await initializeGlobalData();

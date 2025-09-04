@@ -1,4 +1,4 @@
-// Charts functionality for BEL Platform
+// Charts functionality for BEL Portal
 let payoutChartInstance = null; // To hold the chart instance
 let annualSalesChartInstance = null; // To hold the annual sales chart instance
 let productCategoryChartInstance = null; // To hold the product category chart instance

@@ -1,5 +1,5 @@
 /**
- * Data Loader Module for BEL Platform
+ * Data Loader Module for BEL Portal
  * Handles loading and caching of JSON data files
  */
 
@@ -101,7 +101,7 @@ class DataLoader {
                         {
                             "id": 2,
                             "title": "Eligibility and Invitation",
-                            "content": "Participation in the BEL Platform is by invitation only. IoTMart reserves the right to invite qualified candidates based on their industry expertise, business credentials, market influence, and alignment with IoTMart's business objectives."
+                            "content": "Participation in the BEL Portal is by invitation only. IoTMart reserves the right to invite qualified candidates based on their industry expertise, business credentials, market influence, and alignment with IoTMart's business objectives."
                         },
                         {
                             "id": 3,

@@ -717,7 +717,7 @@ BELPlatform/
 ```json
 {
   "logo": "https://irp.cdn-website.com/56869327/dms3rep/multi/iotmart-logo.svg",
-  "platformName": "BEL Platform",
+  "platformName": "BEL Portal",
   "supportEmail": "bel-support@iotmart.com",
   "paymentSchedule": {
     "paymentDate": 5,

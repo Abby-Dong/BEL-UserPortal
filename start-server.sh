@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# BEL Platform Local Development Server
-# This script starts a simple HTTP server to serve the BEL Platform files
+# BEL Portal Local Development Server
+# This script starts a simple HTTP server to serve the BEL Portal files
 
 echo "🚀 Starting BEL Platform Development Server..."
 echo "📂 Serving files from: $(pwd)"
