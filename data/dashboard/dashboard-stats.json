@@ -10,7 +10,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+6.5%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -20,7 +20,7 @@
           "trend": {
             "direction": "negative",
             "percentage": "-0.10%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -30,7 +30,7 @@
           "trend": {
             "direction": "negative",
             "percentage": "-0.2%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -40,7 +40,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+11.8%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         }
       ]
@@ -55,7 +55,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+12.3%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -65,7 +65,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+8.2%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -75,7 +75,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+15.6%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         },
         {
@@ -85,7 +85,7 @@
           "trend": {
             "direction": "positive",
             "percentage": "+22.1%",
-            "text": "Since last month"
+            "text": "Since Last Month (MoM)"
           }
         }
       ]
