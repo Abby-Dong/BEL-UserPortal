@@ -1140,6 +1140,22 @@ background-color: #004a99;
 .milestone-label { width: 60px; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--ot-color-gray-65); }
 .milestone-label.active { color: var(--ds-color-primary); }
 
+/* Commission Rate Styles */
+.milestone-commission-rates {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 5px;
+}
+
+.commission-rate {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    line-height: 1.2;
+    flex: 1;
+}
+
 .resource-filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 .filter-btn { 
     background-color: var(--ds-color-gray-30); 
