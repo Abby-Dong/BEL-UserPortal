@@ -73,7 +73,23 @@ class DataLoader {
      * @returns {Promise<Object>} The loaded JSON data
      */
     async loadJSONFallback(filename) {
-        // Return mock data for development when file:// protocol is used
+        // First try to load the actual JSON file even under file:// protocol
+        try {
+            const url = `${this.baseUrl}${filename}`;
+            console.log(`Attempting to load actual JSON file: ${url}`);
+            
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                this.cache.set(filename, data);
+                console.log(`Successfully loaded actual JSON file: ${filename}`);
+                return data;
+            }
+        } catch (error) {
+            console.warn(`Failed to load actual JSON file ${filename}, falling back to mock data:`, error);
+        }
+        
+        // Fall back to mock data if loading actual file fails
         console.warn(`Loading mock data for ${filename} due to file:// protocol limitations`);
         
         const mockData = this.getMockData(filename);
@@ -146,6 +162,81 @@ class DataLoader {
                                 "name": "Explorer",
                                 "progress": { "current": 45, "target": 50 }
                             }
+                        }
+                    ]
+                };
+
+            case 'earnings/earnings-summary.json':
+                return {
+                    "userEarnings": [
+                        {
+                            "userId": "USER_001",
+                            "totalEarnings": "$8,500.00",
+                            "pendingPayout": "$1,520.00",
+                            "alreadyPaid": "$6,980.00",
+                            "tooltipText": "Payouts over $100 USD are processed on the 5th of each month. Balances under $100 will roll over to the next month."
+                        }
+                    ]
+                };
+                
+            case 'earnings/payout-history.json':
+                return {
+                    "userPayouts": [
+                        {
+                            "userId": "USER_001",
+                            "payouts": [
+                                {
+                                    "id": "PAYOUT-2025-003",
+                                    "date": "2025-08-05",
+                                    "grossEarnings": "$1,250.00",
+                                    "fees": "$25.00",
+                                    "tax": "$50.00",
+                                    "netPayout": "$1,175.00"
+                                },
+                                {
+                                    "id": "PAYOUT-2025-002",
+                                    "date": "2025-07-05",
+                                    "grossEarnings": "$980.00",
+                                    "fees": "$19.60",
+                                    "tax": "$39.20",
+                                    "netPayout": "$921.20"
+                                }
+                            ]
+                        }
+                    ]
+                };
+
+            case 'earnings/order-tracking.json':
+                return {
+                    "userOrders": [
+                        {
+                            "userId": "USER_001",
+                            "orders": [
+                                {
+                                    "orderPlaced": "2025-08-25",
+                                    "orderNumber": "IMUS00068932", 
+                                    "orderAmount": "USD 1,200.00",
+                                    "productActualAmount": "1,150.00",
+                                    "orderStatus": "Processing",
+                                    "statusClass": "status-processing"
+                                },
+                                {
+                                    "orderPlaced": "2025-08-22",
+                                    "orderNumber": "IMDE00068901",
+                                    "orderAmount": "EUR 125.50", 
+                                    "productActualAmount": "118.75",
+                                    "orderStatus": "Completed",
+                                    "statusClass": "status-completed"
+                                },
+                                {
+                                    "orderPlaced": "2025-08-18",
+                                    "orderNumber": "IMJP00068875",
+                                    "orderAmount": "JPY 350,000", 
+                                    "productActualAmount": "330,000",
+                                    "orderStatus": "Canceled",
+                                    "statusClass": "status-canceled"
+                                }
+                            ]
                         }
                     ]
                 };

@@ -200,6 +200,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 inputs.forEach(input => input.removeAttribute('readonly'));
                 storeOriginalValues();
                 updateSaveButtonState();
+                
+                // Update avatar button visibility when entering edit mode
+                if (panel.id === 'account-profile-panel') {
+                    updateRemoveButtonVisibility();
+                }
+                
                 if(inputs.length > 0) inputs[0].focus();
             });
         }
@@ -216,6 +222,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             saveButton.classList.remove('primary');
             saveButton.classList.add('secondary');
             saveButton.disabled = false;
+            
+            // Update avatar button visibility when exiting edit mode
+            if (panel.id === 'account-profile-panel') {
+                updateRemoveButtonVisibility();
+            }
         }
         
         function cancelChanges() {
@@ -249,6 +260,170 @@ document.addEventListener('DOMContentLoaded', async () => {
         if(saveButton) saveButton.addEventListener('click', saveChanges);
         if(cancelButton) cancelButton.addEventListener('click', cancelChanges);
     });
+
+    // --- Profile Avatar Upload Logic ---
+    const avatarUploadBtn = document.getElementById('avatar-upload-btn');
+    const avatarRemoveBtn = document.getElementById('avatar-remove-btn');
+    const avatarUploadInput = document.getElementById('avatar-upload');
+    const avatarPreview = document.querySelector('.avatar-preview');
+    const avatarImg = document.getElementById('profile-avatar-img');
+    const defaultAvatarUrl = 'https://irp.cdn-website.com/56869327/dms3rep/multi/AVATAR-G.png';
+
+    // Initialize avatar state from loaded data
+    let currentAvatarUrl = defaultAvatarUrl;
+    let hasCustomAvatar = false;
+    
+    // Initialize after data is loaded
+    if (avatarImg) {
+        currentAvatarUrl = avatarImg.src || defaultAvatarUrl;
+        hasCustomAvatar = currentAvatarUrl !== defaultAvatarUrl;
+    }
+
+    // Update remove button visibility based on edit mode and avatar state
+    function updateRemoveButtonVisibility() {
+        if (avatarRemoveBtn) {
+            // Show remove button only if we have custom avatar and are in edit mode
+            const panel = document.getElementById('account-profile-panel');
+            const isEditMode = panel && panel.classList.contains('edit-mode');
+            const shouldShow = hasCustomAvatar && isEditMode;
+            avatarRemoveBtn.style.display = shouldShow ? 'inline-flex' : 'none';
+        }
+    }
+
+    // Initialize remove button state
+    updateRemoveButtonVisibility();
+
+    // Handle avatar upload button click - only works in edit mode
+    if (avatarUploadBtn && avatarUploadInput) {
+        avatarUploadBtn.addEventListener('click', () => {
+            const panel = document.getElementById('account-profile-panel');
+            if (panel && panel.classList.contains('edit-mode')) {
+                avatarUploadInput.click();
+            }
+        });
+    }
+
+    // Handle avatar preview click - only works in edit mode
+    if (avatarPreview && avatarUploadInput) {
+        avatarPreview.addEventListener('click', () => {
+            const panel = document.getElementById('account-profile-panel');
+            if (panel && panel.classList.contains('edit-mode')) {
+                avatarUploadInput.click();
+            }
+        });
+    }
+
+    // Handle file selection
+    if (avatarUploadInput && avatarImg) {
+        avatarUploadInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            
+            if (file) {
+                // Validate file type
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Please select a valid image file (JPG, PNG, GIF, or WebP).');
+                    return;
+                }
+
+                // Validate file size (5MB max)
+                const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+                if (file.size > maxSize) {
+                    alert('File size must be less than 5MB.');
+                    return;
+                }
+
+                // Show uploading state
+                if (avatarPreview) {
+                    avatarPreview.classList.add('uploading');
+                }
+
+                // Read and display the file
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // Simulate upload delay
+                    setTimeout(() => {
+                        avatarImg.src = e.target.result;
+                        currentAvatarUrl = e.target.result;
+                        hasCustomAvatar = true;
+                        
+                        // Update UI state
+                        if (avatarPreview) {
+                            avatarPreview.classList.remove('uploading');
+                        }
+                        updateRemoveButtonVisibility();
+                        
+                        // Update header avatar too
+                        const headerAvatar = document.querySelector('.bel-user-profile img');
+                        if (headerAvatar) {
+                            headerAvatar.src = e.target.result;
+                        }
+
+                        // Here you would typically upload to server and update user profile
+                        console.log('Avatar uploaded successfully');
+                        
+                        // Update user profile data in localStorage for demo purposes
+                        if (window.dataLoader && window.dataLoader.userProfile) {
+                            window.dataLoader.userProfile.avatar = e.target.result;
+                        }
+                        
+                        // Show success message
+                        showSuccessModal();
+                    }, 1000);
+                };
+                
+                reader.onerror = () => {
+                    if (avatarPreview) {
+                        avatarPreview.classList.remove('uploading');
+                        avatarPreview.classList.add('error');
+                        setTimeout(() => {
+                            avatarPreview.classList.remove('error');
+                        }, 1000);
+                    }
+                    alert('Error reading file. Please try again.');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Handle avatar removal
+    if (avatarRemoveBtn && avatarImg) {
+        avatarRemoveBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to remove your profile picture?')) {
+                // Reset to default avatar
+                avatarImg.src = defaultAvatarUrl;
+                currentAvatarUrl = defaultAvatarUrl;
+                hasCustomAvatar = false;
+                
+                // Update UI state
+                updateRemoveButtonVisibility();
+                
+                // Update header avatar too
+                const headerAvatar = document.querySelector('.bel-user-profile img');
+                if (headerAvatar) {
+                    headerAvatar.src = defaultAvatarUrl;
+                }
+
+                // Clear file input
+                if (avatarUploadInput) {
+                    avatarUploadInput.value = '';
+                }
+
+                // Here you would typically remove from server and update user profile
+                console.log('Avatar removed successfully');
+                
+                // Update user profile data in localStorage for demo purposes
+                if (window.dataLoader && window.dataLoader.userProfile) {
+                    window.dataLoader.userProfile.avatar = defaultAvatarUrl;
+                }
+                
+                // Show success message
+                showSuccessModal();
+            }
+        });
+    }
 
     // --- Success Modal Logic ---
     function showSuccessModal() {
@@ -647,7 +822,7 @@ function viewTicket(ticketId) {
         return;
     }
     const modal = document.getElementById('view-detail-modal');
-    const body = document.getElementById('view-detail-body');
+    const body = document.getElementById('view-detail_body');
         if (modal && body) {
             // Modal header: Subject 作為主標題
             const header = document.getElementById('view-detail-modal-header');
@@ -981,29 +1156,46 @@ async function loadDashboardData() {
             // 找到市場分析區段的表格（最後一個 panel 中的表格）
             const marketPanels = document.querySelectorAll('.bel-panel');
             const marketPanel = marketPanels[marketPanels.length - 1]; // 最後一個 panel
-            const marketTable = marketPanel ? marketPanel.querySelector('table.bel-table') : null;
             
-            if (marketTable) {
-                marketTable.innerHTML = `
-                    <thead>
-                        <tr>
-                            <th style="width: 40px;">#</th>
-                            <th>Market</th>
-                            <th>Orders</th>
-                            <th>Sales</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${marketAnalysis.slice(0, 5).map((market, index) => `
-                            <tr>
-                                <td>${market.rank || (index + 1)}</td>
-                                <td>${market.region || market.market || market.name}</td>
-                                <td>${market.orders}</td>
-                                <td>${market.sales}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
+            if (marketPanel) {
+                // Create a grid layout with chart on left and table on right
+                marketPanel.innerHTML = `
+                    <h4 class="bel-section-heading-large">Top 5 Market Regions</h4>
+                    <div class="market-analysis-grid">
+                        <div>
+                            <div class="chart-container" style="height: 300px;">
+                                <canvas id="market-regions-chart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="bel-table-container">
+                                <table class="bel-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40px;">#</th>
+                                            <th>Market</th>
+                                            <th>Orders</th>
+                                            <th>Sales</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${marketAnalysis.slice(0, 5).map((market, index) => `
+                                            <tr>
+                                                <td>${market.rank || (index + 1)}</td>
+                                                <td>${market.region || market.market || market.name}</td>
+                                                <td>${market.orders}</td>
+                                                <td>${market.sales}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 `;
+                
+                // Store market data for chart rendering
+                window.marketAnalysisData = marketAnalysis.slice(0, 5);
             }
         }
         
@@ -1021,6 +1213,12 @@ async function loadAccountData() {
         const config = await window.dataLoader.loadConfig();
         
         if (userProfile) {
+            // Update profile avatar
+            const profileAvatarImg = document.getElementById('profile-avatar-img');
+            if (profileAvatarImg) {
+                profileAvatarImg.src = userProfile.avatar;
+            }
+            
             // Update account profile form
             const nameInput = document.getElementById('acc-name');
             const emailInput = document.getElementById('acc-email');
@@ -1128,6 +1326,60 @@ async function loadEarningsData() {
             };
         }
 
+        // Calculate stats for the new cards
+        let totalNetPayouts = 0;
+        let totalOrderCount = 0;
+        let totalOrderAmount = 0;
+
+        // Calculate net payouts from payout history
+        if (payoutHistory && payoutHistory.length > 0) {
+            payoutHistory.forEach(payout => {
+                const netAmount = parseFloat(payout.netPayout.replace(/[$,]/g, ''));
+                totalNetPayouts += netAmount;
+            });
+        }
+
+        // Calculate order stats from order tracking
+        if (orderTracking && orderTracking.length > 0) {
+            totalOrderCount = orderTracking.length;
+            
+            orderTracking.forEach(order => {
+                // Extract numeric value from order amount (handle different currencies)
+                const amountStr = order.orderAmount || '';
+                const numericMatch = amountStr.match(/[\d,]+\.?\d*/);
+                if (numericMatch) {
+                    const amount = parseFloat(numericMatch[0].replace(/,/g, ''));
+                    // Convert to USD equivalent (simplified - you might want more sophisticated currency conversion)
+                    let usdAmount = amount;
+                    if (amountStr.includes('EUR')) {
+                        usdAmount = amount * 1.08; // Approximate EUR to USD
+                    } else if (amountStr.includes('GBP')) {
+                        usdAmount = amount * 1.25; // Approximate GBP to USD
+                    } else if (amountStr.includes('JPY')) {
+                        usdAmount = amount * 0.0067; // Approximate JPY to USD
+                    } else if (amountStr.includes('TWD')) {
+                        usdAmount = amount * 0.031; // Approximate TWD to USD
+                    }
+                    totalOrderAmount += usdAmount;
+                }
+            });
+        }
+
+        // Update the new stats cards
+        const netPayoutsValue = document.getElementById('net-payouts-value');
+        const orderCountsValue = document.getElementById('order-counts-value');
+        const orderAmountValue = document.getElementById('order-amount-value');
+
+        if (netPayoutsValue) {
+            netPayoutsValue.textContent = `$${totalNetPayouts.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+        if (orderCountsValue) {
+            orderCountsValue.textContent = totalOrderCount.toString();
+        }
+        if (orderAmountValue) {
+            orderAmountValue.textContent = `$${totalOrderAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
         // Update earnings summary
         const totalValue = document.querySelector('.total-value');
         const subEarnings = document.querySelector('.sub-earnings');
@@ -1161,8 +1413,7 @@ async function loadEarningsData() {
                             <td>${payout.id}</td>
                             <td>${payout.date}</td>
                             <td>${payout.grossEarnings}</td>
-                            <td>${payout.fees}</td>
-                            <td>${payout.tax}</td>
+                            <td>${payout.wht}</td>
                             <td>${payout.netPayout}</td>
                         </tr>
                     `).join('');
@@ -1172,21 +1423,33 @@ async function loadEarningsData() {
         
         // Update order tracking table
         if (orderTracking) {
+            console.log('Order tracking data loaded:', orderTracking);
             const orderTable = document.getElementById('order-tracking-table');
             if (orderTable) {
                 const tbody = orderTable.querySelector('tbody');
                 
                 if (tbody) {
-                    tbody.innerHTML = orderTracking.map(order => `
+                    tbody.innerHTML = orderTracking.map(order => {
+                        // Split currency and amount with safety checks
+                        const orderAmountParts = (order.orderAmount || '').split(' ');
+                        const currency = orderAmountParts[0] || '';
+                        const amount = orderAmountParts[1] || '';
+                        
+                        return `
                         <tr>
-                            <td>${order.orderPlaced}</td>
-                            <td>${order.orderNumber}</td>
-                            <td>${order.orderAmount}</td>
-                            <td><span class="status-badge ${order.statusClass}">${order.orderStatus}</span></td>
+                            <td>${order.orderPlaced || ''}</td>
+                            <td>${order.orderNumber || ''}</td>
+                            <td>${currency}</td>
+                            <td>${amount}</td>
+                            <td>${order.productActualAmount || ''}</td>
+                            <td><span class="status-badge ${order.statusClass || ''}">${order.orderStatus || ''}</span></td>
                         </tr>
-                    `).join('');
+                    `;
+                    }).join('');
                 }
             }
+        } else {
+            console.error('No order tracking data received');
         }
         
     } catch (error) {

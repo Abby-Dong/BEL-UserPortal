@@ -789,7 +789,7 @@ body::-webkit-scrollbar-track,
     border-spacing: 0;
     table-layout: auto; /* 改為auto，讓列寬根據內容自動調整 */
     word-wrap: break-word;
-    min-width: 500px; /* 強制最小寬度為500px，小於此寬度時會觸發滾動 */
+    min-width: fit-content; /* 讓表格適應內容寬度 */
 }
 .bel-table th, .bel-table td {
     padding: 8px 16px;
@@ -1122,7 +1122,7 @@ background-color: #004a99;
     -webkit-overflow-scrolling: touch; /* iOS平滑滾動 */
 }
 
-/* 響應式表格滾動：當容器寬度小於500px時強制滾動 */
+/* 響應式表格滾动：當容器寬度小於500px時強制滾動 */
 @media (max-width: 500px) {
     .scrollable-table-container {
         overflow-x: scroll;
@@ -1139,22 +1139,6 @@ background-color: #004a99;
 .milestone-labels { display: flex; justify-content: space-between; padding: 0 10px; margin-top: 8px; }
 .milestone-label { width: 60px; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--ot-color-gray-65); }
 .milestone-label.active { color: var(--ds-color-primary); }
-
-/* Commission Rate Styles */
-.milestone-commission-rates {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-    padding: 0 5px;
-}
-
-.commission-rate {
-    font-size: 10px;
-    color: #666;
-    text-align: center;
-    line-height: 1.2;
-    flex: 1;
-}
 
 .resource-filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 .filter-btn { 
@@ -1397,6 +1381,16 @@ background-color: #004a99;
     min-width: 0; 
 }
 
+.market-analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+.market-analysis-grid > div {
+    min-width: 0; 
+}
+
 .panel-header {
     display: flex;
     justify-content: space-between;
@@ -1510,7 +1504,7 @@ background-color: #004a99;
     border-bottom: 1px solid var(--ot-color-gray-45);
 }
 
-/* =====  Custom CSS Classes for Inline Style Refactoring ===== */
+/* ===== Custom CSS Classes for Inline Style Refactoring ===== */
 
 /* Card Layout Styles */
 .bel-card-layout {
@@ -2164,5 +2158,280 @@ background-color: #004a99;
 @media (max-width: 550px) {
     .date-filter input {
         width: 100px !important; /* 視窗寬度小於550px時，寬度縮至100px */
+    }
+}
+
+/* Product sales grid layout - arrange chart and table side by side */
+.product-sales-grid {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.product-sales-grid > div:first-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-sales-grid > div:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Compact styling for Top 20 Products table */
+.product-sales-grid .bel-table {
+    font-size: 0.875rem;
+}
+
+.product-sales-grid .bel-table th,
+.product-sales-grid .bel-table td {
+    padding: 6px 12px;
+    white-space: nowrap;
+}
+
+.product-sales-grid .bel-table th:nth-child(1),
+.product-sales-grid .bel-table td:nth-child(1) {
+    width: 40px;
+    text-align: center;
+}
+
+.product-sales-grid .bel-table th:nth-child(2),
+.product-sales-grid .bel-table td:nth-child(2) {
+    width: 180px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-sales-grid .bel-table th:nth-child(3),
+.product-sales-grid .bel-table td:nth-child(3) {
+    width: 70px;
+    text-align: right;
+}
+
+.product-sales-grid .bel-table th:nth-child(4),
+.product-sales-grid .bel-table td:nth-child(4) {
+    width: 60px;
+    text-align: right;
+}
+
+.product-sales-grid .bel-table th:nth-child(5),
+.product-sales-grid .bel-table td:nth-child(5) {
+    width: 80px;
+    text-align: right;
+}
+
+/* Ensure responsive behavior on smaller screens */
+@media (max-width: 768px) {
+    .product-sales-grid {
+        flex-direction: column;
+    }
+}
+
+/* ===================== Profile Avatar Styles ===================== */
+.profile-avatar-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--ot-color-gray-45);
+}
+
+.avatar-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.avatar-preview {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--ot-color-gray-45);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.avatar-preview:hover {
+    border-color: var(--ds-color-link);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.avatar-preview:hover img {
+    transform: scale(1.05);
+}
+
+.avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.avatar-preview:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-overlay i {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.avatar-info {
+    flex: 1;
+    min-width: 240px;
+}
+
+.avatar-info h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ds-color-gray-90);
+}
+
+.avatar-info p {
+    margin: 0 0 16px 0;
+    font-size: 0.875rem;
+    color: var(--ds-color-gray-60);
+    line-height: 1.4;
+}
+
+.avatar-upload-btn,
+.avatar-remove-btn {
+    margin-right: 12px;
+    margin-bottom: 8px;
+}
+
+.avatar-upload-btn i,
+.avatar-remove-btn i {
+    margin-right: 8px;
+}
+
+/* Hide upload controls by default, show only in edit mode */
+.profile-avatar-section .avatar-upload-btn,
+.profile-avatar-section .avatar-remove-btn {
+    display: none;
+}
+
+.editable-panel.edit-mode .avatar-upload-btn {
+    display: inline-flex;
+}
+
+.editable-panel.edit-mode .avatar-remove-btn {
+    display: inline-flex;
+}
+
+/* Disable avatar click when not in edit mode */
+.profile-avatar-section .avatar-preview {
+    cursor: default;
+}
+
+.editable-panel.edit-mode .avatar-preview {
+    cursor: pointer;
+}
+
+.editable-panel:not(.edit-mode) .avatar-overlay {
+    display: none;
+}
+
+/* Avatar states */
+.avatar-preview.uploading {
+    border-color: var(--ds-color-link);
+    position: relative;
+}
+
+.avatar-preview.uploading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--ds-color-white);
+    border-top: 3px solid var(--ds-color-link);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
+
+.avatar-preview.uploading .avatar-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+}
+
+.avatar-preview.uploading .avatar-overlay i,
+.avatar-preview.uploading .avatar-overlay span {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.avatar-preview.error {
+    border-color: var(--ds-color-error);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Responsive design for avatar section */
+@media (max-width: 768px) {
+    .avatar-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .avatar-info {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .avatar-preview {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar-preview {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .avatar-overlay {
+        font-size: 0.75rem;
+    }
+    
+    .avatar-overlay i {
+        font-size: 1rem;
     }
 }

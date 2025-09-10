@@ -91,7 +91,46 @@
         <div class="bel-main-content" id="bel-main-content">
             <h1 class="bel-h1">Earnings & Orders</h1>
             
-            <div class="bel-panel earnings-summary-panel">
+            <div class="bel-stats-cards">
+                <div class="bel-card" style="margin-bottom: 0px;">
+                    <div class="bel-card-layout">
+                        <div>
+                            <div class="bel-card-title">Net Payouts</div>
+                            <div class="bel-card-value" id="net-payouts-value">Loading...</div>
+                        </div>
+                        <div class="bel-card-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    </div>
+                    <div class="trend-indicator" id="net-payouts-trend">
+                        <i class="fas fa-caret-up"></i> +0% <span class="trend-indicator-text">MoM</span>
+                    </div>
+                </div>
+                <div class="bel-card" style="margin-bottom: 0px;">
+                    <div class="bel-card-layout">
+                        <div>
+                            <div class="bel-card-title">Order Counts</div>
+                            <div class="bel-card-value" id="order-counts-value">Loading...</div>
+                        </div>
+                        <div class="bel-card-icon"><i class="fas fa-shopping-cart"></i></div>
+                    </div>
+                    <div class="trend-indicator" id="order-counts-trend">
+                        <i class="fas fa-caret-up"></i> +0% <span class="trend-indicator-text">MoM</span>
+                    </div>
+                </div>
+                <div class="bel-card" style="margin-bottom: 0px;">
+                    <div class="bel-card-layout">
+                        <div>
+                            <div class="bel-card-title">Order Amount (Total)</div>
+                            <div class="bel-card-value" id="order-amount-value">Loading...</div>
+                        </div>
+                        <div class="bel-card-icon"><i class="fas fa-chart-line"></i></div>
+                    </div>
+                    <div class="trend-indicator" id="order-amount-trend">
+                        <i class="fas fa-caret-up"></i> +0% <span class="trend-indicator-text">MoM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bel-panel earnings-summary-panel" style="display: none;">
                 <div class="total-title">
                     Total Rebate Earnings
                     <span class="tooltip-container">
@@ -135,8 +174,7 @@
                                 <th data-sortable data-type="string">Payout ID</th>
                                 <th data-sortable data-type="date">Date</th>
                                 <th data-sortable data-type="number">Gross Earnings</th>
-                                <th data-sortable data-type="number">Fees</th>
-                                <th data-sortable data-type="number">Tax</th>
+                                <th data-sortable data-type="number">WHT</th>
                                 <th data-sortable data-type="number">Net Payout</th>
                             </tr>
                         </thead>
@@ -171,7 +209,9 @@
                         <tr>
                             <th data-sortable data-type="date">Order Placed</th>
                             <th data-sortable data-type="string">Order Number</th>
+                            <th data-sortable data-type="string">Currency</th>
                             <th data-sortable data-type="number">Order Amount</th>
+                            <th data-sortable data-type="number">Product Actual Amount</th>
                             <th data-sortable data-type="string">Order Status</th>
                         </tr>
                     </thead>

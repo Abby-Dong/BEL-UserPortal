@@ -110,7 +110,7 @@
                            <div class="milestone-label">Leader</div>
                        </div>
                    </div>
-                   <p>Complete 15 more referral orders to be promoted to the 'Leader' level.</p>
+                   <p>Hit $200K in sales to advance to the ‘Leader’ level and enjoy a 5% commission reward.</p>
                 </div>
                 <div class="bel-panel referral-panel" style="margin-bottom: 0px;">
                     <div class="qr-code">
@@ -191,29 +191,37 @@
                 </select>
             </div>
             <div class="bel-panel">
-                <div class="chart-container line-chart-container">
-                    <canvas id="annual-sales-chart"></canvas>
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="annual-performance-chart"></canvas>
                 </div>
             </div>
             
             <div class="section-title">
-                <h3>Product Sales Analysis</h3>
+                <h3>Categories & Products Sales Effectiveness</h3>
             </div>
             <div class="bel-panel">
-                <div class="product-analysis-grid">
+                <div class="product-sales-grid">
                      <div>
-                        <h4 class="bel-section-heading">Top 5 Product Category Analysis</h4>
+                        <h4 style="font-size: 1rem; margin-bottom: 10px;">Top 5 Product Category Analysis</h4>
                         <div class="chart-container bar-chart-container">
                             <canvas id="product-category-chart"></canvas>
                         </div>
                     </div>
                     <div>
-                        <h4 class="bel-section-heading">Top 20 Products</h4>
-                        <div class="scrollable-table-container">
-                            <table class="bel-table bel-table-no-margin">
-                                <thead><tr><th class="bel-th-narrow"></th><th class="bel-th-medium">Product</th><th>Price</th><th>Units</th><th>Total</th></tr></thead>
+                        <h4 style="font-size: 1rem; margin-bottom: 10px;">Top 20 Products</h4>
+                        <div class="scrollable-table-container" style="max-height: 350px;">
+                            <table class="bel-table" style="margin-top:0;">
+                                <thead>
+                                    <tr>
+                                        <th data-sortable data-type="number" style="width:24px;">Rank</th>
+                                        <th data-sortable data-type="string" style="width:160px;">Product</th>
+                                        <th data-sortable data-type="number">Price</th>
+                                        <th data-sortable data-type="number">Qty</th>
+                                        <th data-sortable data-type="number">Total</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                    <!-- Data will be loaded by JavaScript -->
+                                    <!-- Product data will be populated by JavaScript -->
                                 </tbody>
                             </table>
                         </div>
